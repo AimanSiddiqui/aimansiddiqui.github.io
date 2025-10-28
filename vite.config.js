@@ -4,5 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/aimansiddiqui.github.io/',  // Add base URL for GitHub Pages
+  base: '/aimansiddiqui.github.io/',  // Add base URL for GitHub Pages,
+  optimizeDeps: {
+    include: ['@vitejs/plugin-react']
+  }
 })

@@ -2,6 +2,7 @@
   "name": "aiman-portfolio",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "homepage": "https://aimansiddiqui.github.io/aimansiddiqui.github.io/",
   "scripts": {
     "dev": "vite",
