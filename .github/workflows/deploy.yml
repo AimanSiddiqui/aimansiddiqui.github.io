@@ -22,37 +22,24 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
+        working-directory: ./source
         run: npm ci
       
       - name: Build
+        working-directory: ./source
         run: npm run build
         env:
           NODE_ENV: production
 
-      - name: Prepare deployment
+      - name: Create 404 page and nojekyll
+        run: |
+          cp index.html 404.html
+          touch .nojekyll
+
+      - name: Commit and Push
         run: |
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
-          cp build/index.html build/404.html
-          touch build/.nojekyll
-
-      - name: Deploy
-        run: |
-          # Store build files temporarily
-          mkdir -p /tmp/build
-          cp -r build/* /tmp/build/
-          cp build/.nojekyll /tmp/build/
-
-          # Create fresh branch
-          git checkout --orphan temp-branch
-          git reset --hard
-          rm -rf *
-
-          # Copy build files back
-          cp -r /tmp/build/* .
-          cp /tmp/build/.nojekyll .
-
-          # Commit and push
           git add -A
           git commit -m "Deploy site"
-          git push origin HEAD:main --force
+          git push
