@@ -10,7 +10,7 @@ interface SectionProps extends BoxProps {
 }
 
 export const Section = ({ title, children, id, ...props }: SectionProps) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
   useAnimateOnScroll(sectionRef);
 
   return (

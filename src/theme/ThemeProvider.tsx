@@ -1,5 +1,5 @@
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-import { theme } from './theme';
+import { theme } from './index';
 
 interface ThemeProviderProps {
   children: React.ReactNode;
