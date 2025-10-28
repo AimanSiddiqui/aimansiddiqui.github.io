@@ -30,6 +30,10 @@ jobs:
       - name: Build Project
         run: |
           cd source
+          # Clear any cached files
+          rm -rf dist
+          rm -rf node_modules/.vite
+          # Rebuild
           npm run build
           
       - name: Prepare Deployment
