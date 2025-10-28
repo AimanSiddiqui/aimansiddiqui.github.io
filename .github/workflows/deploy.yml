@@ -24,8 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Build
-        run: npm run build
+      - name: Clean and Build
+        run: |
+          rm -rf dist || true
+          npm run build
         env:
           NODE_ENV: production
 
@@ -35,4 +37,7 @@ jobs:
           folder: dist
           branch: gh-pages
           clean: true
+          clean-exclude: |
+            .nojekyll
+          force: true
           single-commit: true
