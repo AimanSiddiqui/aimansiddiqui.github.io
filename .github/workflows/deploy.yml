@@ -18,17 +18,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create necessary files
-        run: |
-          touch .nojekyll
-          cp index.html 404.html
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .
           branch: gh-pages
           clean: true
-          clean-exclude: |
-            .nojekyll
           force: true
+
+      - name: Create .nojekyll
+        run: |
+          git checkout gh-pages
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Add .nojekyll file"
+          git push origin gh-pages
