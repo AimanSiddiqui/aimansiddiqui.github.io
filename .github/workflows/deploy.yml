@@ -31,17 +31,28 @@ jobs:
 
       - name: Prepare deployment
         run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
           cp build/index.html build/404.html
           touch build/.nojekyll
 
       - name: Deploy
         run: |
-          git config --global user.name github-actions
-          git config --global user.email github-actions@github.com
+          # Store build files temporarily
+          mkdir -p /tmp/build
+          cp -r build/* /tmp/build/
+          cp build/.nojekyll /tmp/build/
+
+          # Create fresh branch
           git checkout --orphan temp-branch
           git reset --hard
-          cp -r build/* .
-          rm -rf build
+          rm -rf *
+
+          # Copy build files back
+          cp -r /tmp/build/* .
+          cp /tmp/build/.nojekyll .
+
+          # Commit and push
           git add -A
           git commit -m "Deploy site"
           git push origin HEAD:main --force
