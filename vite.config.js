@@ -4,19 +4,16 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: './',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    minify: true,
+    cssCodeSplit: false,
     rollupOptions: {
-      input: {
-        main: '/index.html'
+      output: {
+        manualChunks: undefined
       }
-    }
-  },
-  resolve: {
-    alias: {
-      '@': '/src'
     }
   }
 })
