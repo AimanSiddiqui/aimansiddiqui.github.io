@@ -7,10 +7,7 @@ export default defineConfig({
   base: '/',
   root: './',
   build: {
-    outDir: '../',
-    emptyOutDir: false,
-    rollupOptions: {
-      input: './src/main.js'
-    }
+    outDir: 'dist',
+    emptyOutDir: true
   }
 })
