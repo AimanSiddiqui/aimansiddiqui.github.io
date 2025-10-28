@@ -29,10 +29,19 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist
-          clean: true
-          single-commit: true
+      - name: Prepare deployment
+        run: |
+          cp build/index.html build/404.html
+          touch build/.nojekyll
+
+      - name: Deploy
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git checkout --orphan temp-branch
+          git reset --hard
+          cp -r build/* .
+          rm -rf build
+          git add -A
+          git commit -m "Deploy site"
+          git push origin HEAD:main --force
