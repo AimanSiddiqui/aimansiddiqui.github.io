@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -9,62 +9,21 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: './source/package-lock.json'
-
-      - name: Install Dependencies
+      - name: Create necessary files
         run: |
-          cd source
-          npm ci
-          
-      - name: Build Project
-        run: |
-          cd source
-          # Clear any cached files
-          rm -rf dist
-          rm -rf node_modules/.vite
-          # Rebuild
-          npm run build
-          
-      - name: Prepare Deployment
-        run: |
-          # Save important files
-          mkdir -p /tmp/backup
-          cp -r .github source /tmp/backup/
-          
-          # Clean repository
-          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-          
-          # Restore important files
-          cp -r /tmp/backup/* .
-          
-          # Copy dist files
-          cp -r source/dist/* .
-          
-          # Create necessary files
           touch .nojekyll
-          cat > _headers << EOL
-          /*
-            Cache-Control: no-cache, no-store, must-revalidate
-            Pragma: no-cache
-            Expires: 0
-          EOL
           cp index.html 404.html
-          
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .
-          branch: main
+          branch: gh-pages
           clean: true
           single-commit: true
