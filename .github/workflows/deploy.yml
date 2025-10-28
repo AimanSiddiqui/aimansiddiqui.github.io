@@ -1,35 +1,72 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pagesname: Deploy to GitHub Pages
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
 
-permissions:
-  contents: write
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    concurrency: ci-${{ github.ref }}
-    steps:
-      - name: Checkout
+on:on:
+
+  push:  push:
+
+    branches: [ main ]    branches: [ main ]
+
+  workflow_dispatch:  workflow_dispatch:
+
+
+
+permissions:permissions:
+
+  contents: write  contents: write
+
+
+
+jobs:jobs:
+
+  build-and-deploy:  deploy:
+
+    runs-on: ubuntu-latest    runs-on: ubuntu-latest
+
+    steps:    concurrency: ci-${{ github.ref }}
+
+      - name: Checkout    steps:
+
+        uses: actions/checkout@v4      - name: Checkout
+
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Set up Node.js        with:
+
+        uses: actions/setup-node@v4          fetch-depth: 0
+
         with:
-          folder: .
+
+          node-version: 20      - name: Deploy
+
+        uses: JamesIves/github-pages-deploy-action@v4
+
+      - name: Install dependencies        with:
+
+        run: npm ci          folder: .
+
+          branch: gh-pages
+
+      - name: Build          clean: true
+
+        run: npm run build          force: true
+
+
+
+      - name: Create 404.html      - name: Create .nojekyll
+
+        run: cp dist/index.html dist/404.html        run: |
+
+          git checkout gh-pages
+
+      - name: Deploy          touch .nojekyll
+
+        uses: JamesIves/github-pages-deploy-action@v4          git add .nojekyll
+
+        with:          git commit -m "Add .nojekyll file"
+
+          folder: dist          git push origin gh-pages
           branch: gh-pages
           clean: true
           force: true
-
-      - name: Create .nojekyll
-        run: |
-          git checkout gh-pages
-          touch .nojekyll
-          git add .nojekyll
-          git commit -m "Add .nojekyll file"
-          git push origin gh-pages
