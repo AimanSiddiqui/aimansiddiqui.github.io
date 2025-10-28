@@ -15,46 +15,52 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: './source/package-lock.json'
-      
-      - name: Install dependencies
-        working-directory: ./source
-        run: npm ci
-      
-      - name: Build
-        working-directory: ./source
-        run: npm run build
-        env:
-          NODE_ENV: production
 
-      - name: Clean and prepare root
+      - name: Install Dependencies
         run: |
-          # Clean old files
-          git rm -rf .
-          git clean -fxd
-          git checkout HEAD -- .github
-          git checkout HEAD -- source
+          cd source
+          npm ci
           
-          # Copy build files
+      - name: Build Project
+        run: |
+          cd source
+          npm run build
+          
+      - name: Prepare Deployment
+        run: |
+          # Save important files
+          mkdir -p /tmp/backup
+          cp -r .github source /tmp/backup/
+          
+          # Clean repository
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+          
+          # Restore important files
+          cp -r /tmp/backup/* .
+          
+          # Copy dist files
           cp -r source/dist/* .
           
           # Create necessary files
           touch .nojekyll
-          echo "/* 
+          cat > _headers << EOL
+          /*
             Cache-Control: no-cache, no-store, must-revalidate
             Pragma: no-cache
-            Expires: 0" > _headers
+            Expires: 0
+          EOL
           cp index.html 404.html
-
+          
       - name: Deploy
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          commit_message: Deploy site
+          folder: .
           branch: main
-          create_branch: false
-          push_options: '--force'
+          clean: true
+          single-commit: true
