@@ -8,6 +8,14 @@ export default defineConfig({
   root: './',
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        index: './index.html'
+      }
+    }
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 })
