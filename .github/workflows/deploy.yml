@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -30,24 +28,15 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Create 404.html
-        run: cp dist/index.html dist/404.html
+      - name: Prepare deployment
+        run: |
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: dist
-          branch: gh-pages
-          clean: true
-          force: true
-
-      - name: Create .nojekyll
-        if: success()
-        run: |
-          git checkout gh-pages
-          touch .nojekyll
-          git add .nojekyll
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Add .nojekyll file" || true
-          git push origin gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
+          enable_jekyll: false
