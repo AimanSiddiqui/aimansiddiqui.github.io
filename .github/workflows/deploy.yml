@@ -32,10 +32,16 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Create 404 page and nojekyll
+      - name: Create required files
         run: |
           cp index.html 404.html
           touch .nojekyll
+          cat > _headers << EOL
+          /*
+            Cache-Control: no-cache, no-store, must-revalidate
+            Pragma: no-cache
+            Expires: 0
+          EOL
 
       - name: Commit and Push
         run: |
