@@ -6,13 +6,13 @@ export default function ThemeToggle() {
   const dispatch = useDispatch()
   const mode = useSelector((s) => s.theme.mode)
 
-  return (
-    <button
-      className="btn"
-      onClick={() => dispatch(toggle())}
-      aria-label={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}
-    >
-      {mode === 'dark' ? 'Light' : 'Dark'}
-    </button>
+  return React.createElement(
+    'button',
+    {
+      className: 'btn',
+      onClick: () => dispatch(toggle()),
+      'aria-label': `Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`
+    },
+    mode === 'dark' ? 'Light' : 'Dark'
   )
 }

@@ -7,12 +7,11 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    emptyOutDir: true,
-    sourcemap: true
+    emptyOutDir: true
   },
-  resolve: {
-    alias: {
-      '@': '/src'
-    }
+  optimizeDeps: {
+    entries: [
+      './src/**/*.js'
+    ]
   }
 })
