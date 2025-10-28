@@ -11,9 +11,12 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Create necessary files
         run: |
@@ -26,4 +29,6 @@ jobs:
           folder: .
           branch: gh-pages
           clean: true
-          single-commit: true
+          clean-exclude: |
+            .nojekyll
+          force: true
