@@ -24,20 +24,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Clean and Build
-        run: |
-          rm -rf dist || true
-          npm run build
+      - name: Build
+        run: npm run build
         env:
           NODE_ENV: production
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
           branch: gh-pages
+          folder: dist
           clean: true
-          clean-exclude: |
-            .nojekyll
-          force: true
           single-commit: true

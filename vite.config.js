@@ -4,14 +4,14 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/aimansiddiqui.github.io/',
+  base: '/',
   build: {
     outDir: 'dist',
-    emptyOutDir: true
-  },
-  optimizeDeps: {
-    entries: [
-      './src/**/*.js'
-    ]
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
   }
 })
