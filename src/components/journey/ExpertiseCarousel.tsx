@@ -30,42 +30,44 @@ const ExpertiseCarousel: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <section id="expertise" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-0">
-      <div className="mb-8 text-center">
+    <section id="expertise" className="py-16 sm:py-20">
+      <div className="mb-8 text-center px-4">
         <p className="text-sm uppercase tracking-[0.24em] text-panda-bamboo">Spotlight</p>
         <h2 className="mt-2 text-3xl font-extrabold text-[#483b5a]">Core Expertise</h2>
       </div>
 
-      <div className="mx-auto max-w-6xl px-0 sm:px-2">
-        {/* Small screens: horizontal scroll */}
-        <div
-          ref={containerRef}
-          className="lg:hidden flex gap-4 overflow-x-auto no-scrollbar py-2 snap-x snap-mandatory"
-          aria-label="Core expertise carousel"
-        >
-          {items.map((it) => {
-            const Icon = it.icon;
-            return (
-              <article
-                key={it.title}
-                className="min-w-[14rem] sm:min-w-[16rem] shrink-0 snap-start rounded-2xl border border-white/70 bg-gradient-to-br from-white to-[#fff8fb] p-4 sm:p-5 shadow-[0_10px_30px_rgba(234,180,200,0.06)]"
-              >
-                <div className="flex flex-col items-start gap-4">
-                  <div className="rounded-xl p-3 bg-white/90 text-[#483b5a] shadow-sm">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-[#483b5a] leading-snug">{it.title}</h3>
-                    <p className="mt-1 text-sm text-[#6b5b72] leading-relaxed">{it.desc}</p>
-                  </div>
+      {/* Mobile / tablet: snap carousel — full bleed so cards reach screen edges */}
+      <div
+        ref={containerRef}
+        className="lg:hidden flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2 px-4 sm:px-6"
+        aria-label="Core expertise carousel"
+      >
+        {items.map((it) => {
+          const Icon = it.icon;
+          return (
+            <article
+              key={it.title}
+              className="w-[80vw] sm:w-[44vw] md:w-[36vw] shrink-0 snap-start rounded-2xl border border-white/70 bg-gradient-to-br from-white to-[#fff8fb] p-5 shadow-[0_10px_30px_rgba(234,180,200,0.06)]"
+            >
+              <div className="flex flex-col gap-4 h-full">
+                <div className="rounded-xl p-3 bg-white/90 text-[#483b5a] shadow-sm self-start">
+                  <Icon className="h-7 w-7" />
                 </div>
-              </article>
-            );
-          })}
-        </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-[#483b5a] leading-snug">{it.title}</h3>
+                  <p className="mt-2 text-sm text-[#6b5b72] leading-relaxed">{it.desc}</p>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+        {/* trailing spacer so last card scrolls fully into view */}
+        <div className="w-4 sm:w-6 shrink-0" aria-hidden="true" />
+      </div>
 
-        {/* Large screens: four-column grid */}
-        <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-4 lg:gap-6 xl:gap-8 lg:py-6">
+      {/* Desktop: four-column grid */}
+      <div className="hidden lg:block mx-auto max-w-6xl px-6 xl:px-0">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8 py-4">
           {items.map((it) => {
             const Icon = it.icon;
             return (
