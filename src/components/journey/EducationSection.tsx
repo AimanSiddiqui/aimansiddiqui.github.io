@@ -24,7 +24,7 @@ const EducationSection: React.FC = () => {
             <div className="flex items-center justify-center gap-3">
               <h3 className="text-xl font-bold text-[#483b5a]">{item.degree}</h3>
               {(item.degree || '').toLowerCase().includes('bachelor') || (item.description || '').toLowerCase().includes('medal') ? (
-                <img src={medalGif} alt="Medal" className="h-25 w-25 absolute -top-1 -right-1 " />
+                <img src={medalGif} alt="Medal" className="h-14 w-14 sm:h-20 sm:w-20 md:h-25 md:w-25 absolute -top-1 -right-1" />
               ) : null}
             </div>
             <p className="mt-1 text-[#5f4d7d]/85">{item.school}</p>
