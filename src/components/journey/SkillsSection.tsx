@@ -197,7 +197,7 @@ const SkillsSection: React.FC = () => {
             })}
           </div>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:gap-5 lg:gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {displayedSkills.map(({ skill, visual }) => {
               const SkillIcon = visual.icon;
 
