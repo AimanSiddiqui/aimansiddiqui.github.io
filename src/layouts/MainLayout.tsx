@@ -1,17 +1,14 @@
-import { Box } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import PandaCompanion from '../components/PandaCompanion';
 
 const MainLayout = () => {
   return (
-    <Box minH="100vh" display="flex" flexDirection="column">
-      <Header />
-      <Box flex="1" as="main">
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-1">
         <Outlet />
-      </Box>
-      <Footer />
-    </Box>
+      </main>
+      <PandaCompanion />
+    </div>
   );
 };
 

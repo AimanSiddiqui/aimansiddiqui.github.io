@@ -1,17 +1,28 @@
-import { Container, Heading, Text, Stack } from '@chakra-ui/react';
+import HeroSection from '../components/journey/HeroSection';
+import ExperienceSection from '../components/journey/ExperienceSection';
+import ExpertiseCarousel from '../components/journey/ExpertiseCarousel';
+import EducationSection from '../components/journey/EducationSection';
+import ProjectsSection from '../components/journey/ProjectsSection';
+import ContactSection from '../components/journey/ContactSection';
+import ProgressRoad from '../components/journey/ProgressRoad';
+import SkillsSection from '../components/journey/SkillsSection';
 
 const Home = () => {
   return (
-    <Container maxW="container.xl" py={10}>
-      <Stack direction="column" gap={6} alignItems="flex-start">
-        <Heading as="h1" size="2xl">
-          Hi, I'm Aiman Siddiqui
-        </Heading>
-        <Text fontSize="xl">
-          Welcome to my portfolio website. I'm a passionate developer focused on building amazing web experiences.
-        </Text>
-      </Stack>
-    </Container>
+    <div className="relative isolate overflow-x-hidden">
+      <ProgressRoad />
+
+      <main className="relative z-20 max-w-6xl mx-auto px-6">
+        <HeroSection />
+        <ExpertiseCarousel />
+        <ExperienceSection />
+        <EducationSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
+
+    </div>
   );
 };
 

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Project Alpha",
+    "desc": "A modern web app.",
+    "tech": ["React", "TS"],
+    "link": "#"
+  },
+  {
+    "title": "Project Beta",
+    "desc": "Design system work.",
+    "tech": ["Design", "CSS"],
+    "link": "#"
+  },
+  {
+    "title": "Project Gamma",
+    "desc": "Open source library.",
+    "tech": ["Node", "TS"],
+    "link": "#"
+  },
+  {
+    "title": "Project Delta",
+    "desc": "Mobile-first PWA.",
+    "tech": ["PWA", "React"],
+    "link": "#"
+  }
+]

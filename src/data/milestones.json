@@ -1,0 +1,27 @@
+[
+  {
+    "year": "2025",
+    "title": "Research Assistant at DFKI",
+    "desc": "Working on IXplain and LegalSeek frontend applications with ReactJS, Redux Toolkit, OAuth, Python, and FastAPI."
+  },
+  {
+    "year": "2025",
+    "title": "Werkstudent Full Stack Engineer at WorkCentrix",
+    "desc": "Built Angular and PHP applications, reusable UI libraries, and cloud-integrated document workflows."
+  },
+  {
+    "year": "2024",
+    "title": "Started M.Sc. at Saarland University",
+    "desc": "Began Master of Science in Computer Science in Germany with a focus on advanced software systems."
+  },
+  {
+    "year": "2023",
+    "title": "Senior Software Engineer at Folio3",
+    "desc": "Led React Native, React.js, and Node.js delivery for scalable product and AI-driven features."
+  },
+  {
+    "year": "2021",
+    "title": "Graduated B.Sc. in Computer Science",
+    "desc": "Completed studies at NUCES Karachi with a CGPA of 3.91 and Bronze Medal recognition."
+  }
+]

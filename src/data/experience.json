@@ -1,0 +1,50 @@
+[
+  {
+    "role": "Research Assistant",
+    "company": "DFKI – Kaiserslautern, Germany",
+    "period": "07/2025 - Present",
+    "description": "Working on IXplain and LegalSeek frontend web application on ReactJS using Redux toolkit, Context, OAuth, Rest APIs using Python and FAST APIs."
+  },
+  {
+    "role": "Werkstudent Full Stack Engineer",
+    "company": "WorkCentrix Gmbh – Saarbrucken, Germany",
+    "period": "03/2025 - 06/2025",
+    "achievements": [
+      "Designed and developed scalable web applications using PHP, MySQL, and Angular, integrating cloud services and streamlining document workflows to enhance user experience and operational efficiency by 10%.",
+      "Built and implemented a comprehensive library of reusable UI components in Angular, ensuring code consistency and accelerating feature development for Alcom, leading to a 30% reduction in front-end development time."
+    ]
+  },
+  {
+    "role": "Senior Software Engineer",
+    "company": "Folio3 Pvt Ltd – Karachi, Pakistan",
+    "period": "01/2023 - 10/2024",
+    "achievements": [
+      "Authored comprehensive technical documentation, including API guides and troubleshooting manuals, which decreased developer onboarding time by 40% and reduced code-related help-desk tickets by 15 per week.",
+      "Developed React Native and React.js applications for Thrive with deployment over Jenkins, optimizing performance with React Query and WatermelonDB, achieving 10,000+ active users and a 25% performance boost.",
+      "Architected and deployed scalable backend systems for Genopalate using NodeJS (NestJS) and AWS services (Lambda, Cognito, S3), enhancing scalability and reducing latency by 30%.",
+      "Delivered data-driven solutions for Genopalate with automated pipelined deployment via Github Actions and Docker and advanced, scalable features for Alcom, applied modern development principles to boost user engagement by 20%.",
+      "Deployed AI-driven recommendation systems and LLM chatbots, increasing user engagement by 25% and reducing user support response times by 40%."
+    ]
+  },
+  {
+    "role": "Software Engineer",
+    "company": "Folio3 Pvt Ltd – Karachi, Pakistan",
+    "period": "07/2021 - 12/2022",
+    "achievements": [
+      "Developed and maintained full-stack applications using React Native (Moodology), Redux, Context API, and continuous integrations including third party (Shopify, Firebase), delivering 10+ apps with 50,000+ active users and contributing over 100 commits weekly.",
+      "Engineered application services for Clomr, leveraging NodeJS for APIs, Google Cloud Functions, NoSQL databases, Docker Containers and asynchronous programming, achieving a 30% efficiency improvement.",
+      "Spearheaded AI model development with Mask R-CNN for advanced object tracking and image stitching in Hancock, reducing processing time by 40%.",
+      "Enhanced customer engagement by integrating AI-driven analytics into Genopalate, improving food recommendations and boosting retention by 20%.",
+      "Worked on integration of EHR and EMR Systems using FHIR and HL7."
+    ]
+  },
+  {
+    "role": "Machine Learning Intern",
+    "company": "Bytecorp – Karachi, Pakistan",
+    "period": "06/2020 - 07/2020",
+    "achievements": [
+      "Optimized Convolutional Neural Networks (CNNs) in python using tensorflow by reducing computational overhead, achieving a 25% reduction in inference time.",
+      "Boosted model accuracy by 10–20% on limited datasets by applying Transfer Learning techniques, demonstrating expertise in adapting pre-trained models for performance in resource-constrained environments."
+    ]
+  }
+]

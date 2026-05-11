@@ -1,0 +1,19 @@
+{
+  "about": {
+    "title": "About Me",
+    "paragraphs": [
+      "Full Stack Software Engineer with 3+ years of experience developing and optimizing scalable web and mobile applications using React, Angular, TypeScript, and Node.js.",
+      "Skilled in building high-performance frontend architectures, integrating RESTful APIs, and improving legacy codebases for maintainability and scalability.",
+      "Strong foundation in cloud-native development (AWS, GCP), CI/CD pipelines, and Agile methodologies. Adept at collaborating with cross-functional teams to deliver user-centric solutions and enhance system performance."
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "aimansiddiqui95@gmail.com",
+    "phone": "+491622147015"
+  },
+  "stats": {
+    "title": "Stats",
+    "description": "3+ years of full-stack development experience | 10+ applications shipped | 50,000+ active users across products"
+  }
+}

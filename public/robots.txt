@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aimansiddiqui.github.io/sitemap.xml

@@ -1,0 +1,9 @@
+{
+  "frontend": ["React", "React Native", "JavaScript", "TypeScript", "HTML", "CSS", "Angular", "Redux", "Context API", "React Query"],
+  "backend": ["Node.js", "NestJS", "FastAPI", "REST APIs", "GraphQL", "RabbitMQ", "AWS Lambdas", "Google Cloud Functions", "WebSockets", "OAuth", "JWT", "Microservices Architecture"],
+  "database": ["SQL", "MongoDB", "PostgreSQL", "Redis"],
+  "tools": ["GitLab", "Bitbucket", "Agile Development", "Debugging", "Jupyter Notebook"],
+  "cloud": ["AWS", "Google Cloud", "Kubernetes", "Serverless Architecture", "CI/CD Pipelines", "Jenkins", "Github Actions", "Docker"],
+  "testing": ["Jest", "integration testing"],
+  "ai_ml": ["AI Models", "Deep Learning", "Generative Adversarial Networks (GAN)", "Computer Vision", "Feature Extraction", "OpenCV", "TensorFlow", "Pytorch", "Keras", "Scikit-learn", "NumPy", "Pandas", "Python", "Mask R-CNN", "Transfer Learning", "CNNs"]
+}
