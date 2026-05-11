@@ -22,7 +22,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <header className="min-h-screen flex items-center justify-center text-center">
-      <div className="relative mx-auto w-full max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl h-[40vh] sm:h-[50vh] md:h-[65vh] lg:h-[72vh] xl:h-[78vh] overflow-visible">
+      <div className="relative mx-auto w-full max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl h-[40vh] sm:h-[50vh] md:h-[65vh] lg:h-[72vh] xl:h-[78vh] overflow-visible -z-10">
         {isMobile ? <MobileTree className="absolute inset-0" /> : <RealisticTree className="absolute inset-0" />}
       </div>
 
