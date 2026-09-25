@@ -3,7 +3,7 @@ import ContactForm from './ContactForm';
 
 const ContactSection: React.FC = () => {
   return (
-    <footer id="contact" className="py-24">
+    <footer id="contact" className="pt-24 pb-56 sm:py-24">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-sm uppercase tracking-[0.24em] text-panda-bamboo">Finish Line</p>
@@ -22,7 +22,7 @@ const ContactSection: React.FC = () => {
             <a href="https://github.com/aimansiddiqui" target="_blank" rel="noopener noreferrer" className="text-[#6b5b72] hover:text-[#d96b9d] transition-colors font-semibold">
               GitHub
             </a>
-            <a href="https://www.linkedin.com/in/aimansiddiqui" target="_blank" rel="noopener noreferrer" className="text-[#6b5b72] hover:text-[#d96b9d] transition-colors font-semibold">
+            <a href="https://www.linkedin.com/in/aiman-siddiqui1999/" target="_blank" rel="noopener noreferrer" className="text-[#6b5b72] hover:text-[#d96b9d] transition-colors font-semibold">
               LinkedIn
             </a>
           </div>
