@@ -1,5 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import PandaAvatar from './PandaAvatar';
+
+// Chat head geometry (px). The avatar is drawn larger than the circle and
+// positioned so her face sits in the middle; a mask keeps everything inside the
+// circle except the cap and ears, which poke out over the top.
+const CIRCLE = 150;
+const HEAD_ROOM = 30; // space above the circle for the ears
+const AVATAR_WIDTH = 180;
+// Her face centre as a fraction of the avatar's width/height
+const FACE = { x: 0.5, y: 0.45 };
+const AVATAR_HEIGHT = AVATAR_WIDTH * (1018 / 916);
+
+const headMask = [
+  `radial-gradient(circle ${CIRCLE / 2}px at 50% ${HEAD_ROOM + CIRCLE / 2}px, #000 98%, transparent 100%)`,
+  'linear-gradient(#000, #000)',
+].join(', ');
 
 const PandaCompanion: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -10,80 +26,60 @@ const PandaCompanion: React.FC = () => {
   };
 
   return (
-    <motion.div
-      className="fixed bottom-6 right-6 z-30 select-none cursor-pointer"
+    <motion.button
+      type="button"
+      aria-label="Chat with Aiman — jump to the contact form"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 select-none cursor-pointer bg-transparent border-0 p-0"
+      style={{ width: CIRCLE, height: CIRCLE + HEAD_ROOM }}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, type: 'spring', stiffness: 120, damping: 14 }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.06 }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Panda body */}
-      <motion.div
-        className="relative w-20 h-34 flex flex-col items-center justify-center"
-        animate={{ y: [0, -4, 0] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Circle backdrop */}
+      <span
+        className="absolute left-0 rounded-full bg-gradient-to-br from-[#ffd8e8] to-[#e4d9ff] border-[3px] border-white shadow-lg"
+        style={{ top: HEAD_ROOM, width: CIRCLE, height: CIRCLE }}
+      />
+
+      {/* Character, clipped to the circle below her eyes */}
+      <span
+        className="absolute inset-0"
+        style={{
+          WebkitMaskImage: headMask,
+          maskImage: headMask,
+          WebkitMaskSize: `100% 100%, 100% ${HEAD_ROOM + CIRCLE / 2}px`,
+          maskSize: `100% 100%, 100% ${HEAD_ROOM + CIRCLE / 2}px`,
+          WebkitMaskRepeat: 'no-repeat',
+          maskRepeat: 'no-repeat',
+          WebkitMaskPosition: 'center, top',
+          maskPosition: 'center, top',
+        }}
       >
-        {/* Head */}
-        <motion.div className="relative">
-          <div className="w-20 h-20 bg-white rounded-full relative border-2 border-gray-200 shadow-lg">
-            {/* Left eye black patch */}
-            <motion.div
-              className="absolute top-6 left-3 w-5 h-5 bg-black rounded-full"
-              animate={{ scale: [1, 0.7, 1] }}
-              transition={{ duration: 0.3, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 3.2 }}
-            />
-            {/* Right eye black patch */}
-            <motion.div
-              className="absolute top-6 right-3 w-5 h-5 bg-black rounded-full"
-              animate={{ scale: [1, 0.7, 1] }}
-              transition={{ duration: 0.3, times: [0, 0.5, 1], repeat: Infinity, repeatDelay: 3.2 }}
-            />
-            {/* Eye shine */}
-            <div className="absolute top-7 left-4 w-1.5 h-1.5 bg-white rounded-full" />
-            <div className="absolute top-7 right-4 w-1.5 h-1.5 bg-white rounded-full" />
-            {/* Nose */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1 w-1.5 h-1.5 bg-black rounded-full" />
-            {/* Mouth — simple curve */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3 h-1.5 border-b-2 border-black rounded-b-full" />
-          </div>
-          {/* Ears */}
-          <div className="absolute z-10 -top-4 left-1 w-7 h-7 bg-black rounded-full" />
-          <div className="absolute z-10 -top-4 right-1 w-7 h-7 bg-black rounded-full" />
-        </motion.div>
-
-        {/* Body */}
-        <motion.div
-          className="mt-1 w-16 h-16 bg-white rounded-3xl shadow-md border border-gray-200 flex items-center justify-center gap-1"
-          animate={{ rotateZ: [-1, 1, -1] }}
-          transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+        <span
+          className="absolute"
+          style={{
+            left: CIRCLE / 2 - AVATAR_WIDTH * FACE.x,
+            top: HEAD_ROOM + CIRCLE / 2 - AVATAR_HEIGHT * FACE.y,
+          }}
         >
-          {/* Arms holding bamboo */}
-          <div className="absolute -left-2 top-2 w-4 h-8 bg-black rounded-full" />
-          <div className="absolute -right-2 top-2 w-4 h-8 bg-black rounded-full" />
-
-        </motion.div>
-
-        {/* Belly spot */}
-        <motion.div
-          className="absolute bottom-5 w-7 h-8 bg-gray-300 rounded-full opacity-60"
-          animate={{ opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.div>
+          <PandaAvatar size={`${AVATAR_WIDTH}px`} label="" />
+        </span>
+      </span>
 
       {/* Chat bubble on hover */}
-      <motion.div
-        className="absolute -top-20 z-10 right-0 bg-gradient-to-br from-[#d96b9d] to-[#8b6dd6] text-white text-sm font-semibold px-4 py-4 rounded-full whitespace-nowrap pointer-events-none shadow-lg overflow-hidden"
+      <motion.span
+        className="absolute -top-10 z-10 right-0 bg-gradient-to-br from-[#d96b9d] to-[#8b6dd6] text-white text-sm font-semibold px-4 py-2 rounded-full whitespace-nowrap pointer-events-none shadow-lg"
         initial={{ opacity: 0, y: 8, scale: 0.8 }}
         animate={isHovered ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 8, scale: 0.8 }}
         transition={{ duration: 0.3 }}
       >
         Want to chat?
-      </motion.div>
-    </motion.div>
+      </motion.span>
+    </motion.button>
   );
 };
 

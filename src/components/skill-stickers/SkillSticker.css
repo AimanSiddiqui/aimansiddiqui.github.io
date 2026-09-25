@@ -1,0 +1,38 @@
+/*
+ * Die-cut look without SVG filters: the artwork is drawn three times —
+ * a soft shadow, a white "sticker paper" copy with a very thick stroke, and
+ * the artwork itself. --sw on an element is its own stroke width, so thick
+ * lines get a border that follows their full width.
+ */
+.skill-sticker {
+  display: block;
+  overflow: visible;
+}
+
+.skill-sticker__cut *,
+.skill-sticker__shadow * {
+  stroke-width: calc(var(--sw, 2.6) * 1px + 18px);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 1;
+  paint-order: normal;
+}
+
+.skill-sticker__cut * {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.skill-sticker__shadow * {
+  fill: rgb(61 44 92);
+  stroke: rgb(61 44 92);
+}
+
+.skill-sticker__cut [fill='none'],
+.skill-sticker__shadow [fill='none'] {
+  fill: none;
+}
+
+.skill-sticker__shadow {
+  opacity: 0.13;
+}

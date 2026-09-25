@@ -1,0 +1,229 @@
+/*
+ * PandaAvatar
+ *
+ * Every image layer shares the same canvas as the source artwork (916 × 1018),
+ * so layers simply stack with `inset: 0`. Positions below are percentages of
+ * that canvas, so everything scales with --avatar-size.
+ *
+ * JS only writes three custom properties on the root element:
+ *   --look-x  -1 (cursor far left) … 1 (far right)
+ *   --look-y  -1 (far up) … 1 (far down)
+ *   --near     0 (cursor far away) … 1 (cursor on the character)
+ * Everything that moves is derived from those here.
+ */
+
+.panda-avatar {
+  /* ── Size ─────────────────────────────────────────────────────────── */
+  --avatar-size: min(420px, 82vw); /* width; height follows --avatar-aspect */
+  --avatar-aspect: 916 / 1018;
+
+  /* ── Eye tracking ─────────────────────────────────────────────────── */
+  /* Max iris travel, as % of the canvas (0.44% ≈ 4px on the 916px source). */
+  --pupil-range-x: 0.44%;
+  --pupil-range-y: 0.2%;
+
+  /* ── Head / body follow ───────────────────────────────────────────── */
+  --head-rotate: 1.5deg; /* rotation at lookX = ±1 */
+  --body-shift-x: 3px;   /* translation at lookX = ±1 */
+  --body-shift-y: 2px;   /* translation at lookY = ±1 */
+
+  /* ── Proximity reaction ───────────────────────────────────────────── */
+  --near-scale: 0.025;   /* +2.5% when the cursor is on the character */
+  --ear-tilt: 7deg;
+  --ear-lift: 0.5%;
+  --blush-opacity: 0.5;
+
+  /* ── Blink ────────────────────────────────────────────────────────── */
+  --blink-duration: 150ms;
+
+  /* ── Artwork geometry (printed by scripts/avatar/split_layers.py) ── */
+  --lids-top: 30.35%; /* top/bottom of the closed-eyes layer */
+  --lids-bottom: 37.82%;
+  --left-ear-pivot: 31.01% 14.15%;
+  --right-ear-pivot: 67.4% 14.05%;
+  --left-cheek-x: 39%;
+  --left-cheek-y: 42%;
+  --right-cheek-x: 60%;
+  --right-cheek-y: 42%;
+
+  /* Written by JS */
+  --look-x: 0;
+  --look-y: 0;
+  --near: 0;
+
+  position: relative;
+  width: var(--avatar-size);
+  aspect-ratio: var(--avatar-aspect);
+  margin-inline: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+.panda-avatar.is-ready {
+  opacity: 1;
+}
+
+.panda-avatar__follow,
+.panda-avatar__breathe,
+.panda-avatar__layer,
+.panda-avatar__eyes {
+  position: absolute;
+  inset: 0;
+}
+
+.panda-avatar__layer {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -webkit-user-drag: none;
+}
+
+/* Whole figure leans and drifts toward the cursor, pivoting where she sits */
+.panda-avatar__follow {
+  transform-origin: 50% 100%;
+  transform:
+    translate(
+      calc(var(--look-x) * var(--body-shift-x)),
+      calc(var(--look-y) * var(--body-shift-y))
+    )
+    rotate(calc(var(--look-x) * var(--head-rotate)))
+    scale(calc(1 + var(--near) * var(--near-scale)));
+  will-change: transform;
+}
+
+.panda-avatar__breathe {
+  transform-origin: 50% 100%;
+  animation: panda-avatar-breathe 4.2s ease-in-out infinite;
+}
+
+@keyframes panda-avatar-breathe {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  45% {
+    transform: scale(1.004, 1.011);
+  }
+}
+
+/* ── Ears (behind the body layer) ─────────────────────────────────────── */
+.panda-avatar__ear {
+  translate: 0 calc(var(--near) * var(--ear-lift) * -1);
+}
+
+.panda-avatar__ear--left {
+  transform-origin: var(--left-ear-pivot);
+  rotate: calc(var(--near) * var(--ear-tilt) * -1);
+}
+
+.panda-avatar__ear--right {
+  transform-origin: var(--right-ear-pivot);
+  rotate: calc(var(--near) * var(--ear-tilt));
+}
+
+.panda-avatar.is-near .panda-avatar__ear {
+  animation: panda-avatar-ear-wiggle 650ms ease-in-out;
+}
+
+.panda-avatar.is-near .panda-avatar__ear--right {
+  animation-delay: 70ms;
+}
+
+@keyframes panda-avatar-ear-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-6deg);
+  }
+  60% {
+    transform: rotate(4deg);
+  }
+}
+
+/* ── Blush that warms up as the cursor gets close ─────────────────────── */
+.panda-avatar__blush {
+  position: absolute;
+  width: 10%;
+  height: 5%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 110 130 / 0.9), rgb(255 110 130 / 0));
+  mix-blend-mode: multiply;
+  opacity: calc(var(--near) * var(--blush-opacity));
+}
+
+.panda-avatar__blush--left {
+  left: var(--left-cheek-x);
+  top: var(--left-cheek-y);
+}
+
+.panda-avatar__blush--right {
+  left: var(--right-cheek-x);
+  top: var(--right-cheek-y);
+}
+
+/* ── Eyes ─────────────────────────────────────────────────────────────── */
+/* Everything inside is clipped to the eye openings, so the irises can never
+   leave the eyes. --eye-mask is set inline (depends on the base URL). */
+.panda-avatar__eyes {
+  -webkit-mask-image: var(--eye-mask);
+  mask-image: var(--eye-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.panda-avatar__iris {
+  translate:
+    calc(var(--look-x) * var(--pupil-range-x))
+    calc(var(--look-y) * var(--pupil-range-y));
+}
+
+/* Closed eyes (generated from the artwork) are revealed top-down, like lids */
+.panda-avatar__lids {
+  clip-path: inset(0 0 100% 0);
+}
+
+.panda-avatar.is-blinking .panda-avatar__lids {
+  animation: panda-avatar-blink var(--blink-duration) ease-in-out;
+}
+
+@keyframes panda-avatar-blink {
+  0%,
+  100% {
+    clip-path: inset(0 0 calc(100% - var(--lids-top) + 0.5%) 0);
+  }
+  45%,
+  55% {
+    clip-path: inset(0 0 calc(100% - var(--lids-bottom)) 0);
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+/* Keep the small eye movements and blinks; drop the swaying, breathing and ear
+   bounce. */
+@media (prefers-reduced-motion: reduce) {
+  .panda-avatar {
+    transition: none;
+  }
+
+  .panda-avatar__follow {
+    transform: none;
+  }
+
+  .panda-avatar__breathe,
+  .panda-avatar.is-near .panda-avatar__ear {
+    animation: none;
+  }
+
+  .panda-avatar__ear {
+    translate: none;
+    rotate: none;
+  }
+}

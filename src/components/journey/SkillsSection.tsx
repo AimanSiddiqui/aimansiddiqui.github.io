@@ -50,6 +50,8 @@ import {
   SiAmazon,
 } from 'react-icons/si';
 import skills from '../../data/skills.json';
+import SkillSticker from '../skill-stickers/SkillSticker';
+import { SKILL_STICKERS } from '../skill-stickers/skills';
 
 type SkillCategory = keyof typeof skills;
 
@@ -197,9 +199,10 @@ const SkillsSection: React.FC = () => {
             })}
           </div>
 
-          <div className="mt-6 grid gap-4 sm:gap-5 lg:gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:gap-5 lg:gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {displayedSkills.map(({ skill, visual }) => {
               const SkillIcon = visual.icon;
+              const sticker = SKILL_STICKERS[skill];
 
               return (
                 <motion.div
@@ -212,12 +215,21 @@ const SkillsSection: React.FC = () => {
                   style={{ boxShadow: `0 0 0 1px ${visual.glow}` }}
                 >
                   <div className="flex items-center gap-3">
-                    <div
-                      className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5"
-                      style={{ color: visual.accent, boxShadow: `inset 0 0 0 1px ${visual.glow}` }}
-                    >
-                      <SkillIcon className="text-[1.25rem]" />
-                    </div>
+                    {sticker ? (
+                      <SkillSticker
+                        skill={sticker}
+                        size={58}
+                        showLabel={false}
+                        className="shrink-0 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div
+                        className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5"
+                        style={{ color: visual.accent, boxShadow: `inset 0 0 0 1px ${visual.glow}` }}
+                      >
+                        <SkillIcon className="text-[1.25rem]" />
+                      </div>
+                    )}
                     <div className="min-w-0 text-left">
                       <p className="truncate text-[0.95rem] font-bold text-[#483b5a] group-hover:text-[#5f4d7d]">{skill}</p>
                     </div>

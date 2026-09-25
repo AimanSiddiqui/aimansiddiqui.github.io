@@ -1,0 +1,94 @@
+/* Hero sign: the panda clips fill the box, the live name sits on the paper */
+.panda-sign {
+  position: relative;
+  width: 92vw;
+  max-width: 880px;
+  container-type: inline-size;
+}
+
+@media (min-width: 640px) {
+  .panda-sign {
+    width: 64vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .panda-sign {
+    width: 52vw;
+  }
+}
+
+.panda-sign__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.panda-sign__paper {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* sits a bit below the pole's rope loops */
+  padding-top: 2%;
+}
+
+.panda-sign__paper .bubble-name {
+  --bubble-name-size: 10.5cqw;
+  /* one line, so the role and tagline fit on the paper below it */
+  width: max-content;
+}
+
+/* Name plus role and tagline, stacked on the paper */
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-title__role,
+.hero-title__tagline {
+  margin: 0;
+  font-family: 'Nunito', ui-rounded, system-ui, sans-serif;
+  line-height: 1.25;
+  animation: hero-title-in 0.6s ease-out both;
+}
+
+.hero-title__role {
+  margin-top: 0.9cqw;
+  font-size: max(3.3cqw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #6e4f7e;
+  animation-delay: 0.3s;
+}
+
+.hero-title__tagline {
+  margin-top: 0.5cqw;
+  font-size: max(2.7cqw, 10.5px);
+  font-weight: 500;
+  color: #9a7fa6;
+  animation-delay: 0.55s;
+}
+
+@keyframes hero-title-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title__role,
+  .hero-title__tagline {
+    animation: none;
+  }
+}

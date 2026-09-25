@@ -6,11 +6,13 @@ import ProjectsSection from '../components/journey/ProjectsSection';
 import ContactSection from '../components/journey/ContactSection';
 import ProgressRoad from '../components/journey/ProgressRoad';
 import SkillsSection from '../components/journey/SkillsSection';
+import StickerField from '../components/skill-stickers/StickerField';
 
 const Home = () => {
   return (
     <div className="relative isolate overflow-x-hidden">
       <ProgressRoad />
+      <StickerField />
 
       <main className="relative z-20 max-w-6xl mx-auto px-6">
         <HeroSection />

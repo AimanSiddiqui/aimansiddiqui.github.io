@@ -1,26 +1,26 @@
 [
   {
-    "title": "Project Alpha",
-    "desc": "A modern web app.",
-    "tech": ["React", "TS"],
-    "link": "#"
+    "title": "ScanWise",
+    "subtitle": "AI-Powered Career Assistant",
+    "desc": "Reads a resume and a job description, then scores the match, lists matched and missing skills and gives personalised recommendations. A Next.js dashboard turns the AI analysis into clear next steps, backed by FastAPI and PostgreSQL services with streaming AI responses.",
+    "tech": ["Next.js", "TypeScript", "shadcn/ui", "FastAPI", "PostgreSQL"]
   },
   {
-    "title": "Project Beta",
-    "desc": "Design system work.",
-    "tech": ["Design", "CSS"],
-    "link": "#"
+    "title": "Balcony PV Detection",
+    "subtitle": "M.Sc. Thesis, Saarland University",
+    "desc": "A computer vision pipeline that detects balcony solar panels in street-level imagery. It samples locations along OpenStreetMap roads, fetches Google Street View images and validates detections against the MaStR registry, mapping them to support local energy-grid planning.",
+    "tech": ["Python", "Computer Vision", "OpenStreetMap", "Google Street View", "MaStR"]
   },
   {
-    "title": "Project Gamma",
-    "desc": "Open source library.",
-    "tech": ["Node", "TS"],
-    "link": "#"
+    "title": "HEALY",
+    "subtitle": "Saarland University",
+    "desc": "An LLM agent built with Mistral and LangGraph that explains healthcare cost predictions from the SPARCS dataset, using SHAP to surface the key cost drivers. Evaluated with a RAG-based G-Eval pipeline at about 0.95 precision.",
+    "tech": ["Python", "Mistral", "LangGraph", "SHAP", "RAG"]
   },
   {
-    "title": "Project Delta",
-    "desc": "Mobile-first PWA.",
-    "tech": ["PWA", "React"],
-    "link": "#"
+    "title": "LearnAid",
+    "subtitle": "Saarland University",
+    "desc": "A React Native AI tutoring app, built by a small team I led. An LLM feedback layer gives personalised guidance based on how learners perform, and a recommendation engine builds learning paths from their progress.",
+    "tech": ["React Native", "FastAPI", "LLMs", "Recommendation Systems"]
   }
 ]

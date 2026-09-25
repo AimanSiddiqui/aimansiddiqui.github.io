@@ -1,0 +1,47 @@
+/* Decorative layer behind the page content (Home puts <main> above it) */
+.sticker-field {
+  --mx: 0;
+  --my: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sticker-field__item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+/* Cursor depth: --depth is 6px (front) … 1px (back) */
+.sticker-field__parallax {
+  transform: translate3d(calc(var(--mx) * var(--depth)), calc(var(--my) * var(--depth)), 0);
+}
+
+/* Gentle hover in place once everything has settled */
+.sticker-field.is-settled .sticker-field__float {
+  animation: sticker-field-float var(--float-duration) ease-in-out var(--float-delay) infinite;
+}
+
+@keyframes sticker-field-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, var(--float-y), 0) rotate(var(--float-rotate));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker-field__parallax {
+    transform: none;
+  }
+
+  .sticker-field.is-settled .sticker-field__float {
+    animation: none;
+  }
+}

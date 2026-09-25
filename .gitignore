@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Source media for scripts/avatar (kept locally, not needed by the site)
+public/panda/raw/
+scripts/avatar/avatar.gif
+scripts/avatar/avatar-source.png
+# Unused old assets
+public/panda.mp4
+public/025bb9c3-d8f5-48dc-abb9-eaa3867cc8bd.webm
+public/Aiman_Siddiqui_Resume_old.pdf
